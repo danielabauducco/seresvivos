@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Misión: Exploradores de los seres vivos</title>
+<style>
+:root{--green:#2d7855;--green-light:#e5f3e9;--orange:#f39a35;--orange-light:#fff0dc;--blue:#43a6d7;--blue-light:#e6f5fc;--ink:#19354a;--paper:#fffdf8;--purple:#8870c7}
+*{box-sizing:border-box}body{margin:0;background:#f4f8f4;color:var(--ink);font-family:"Trebuchet MS",Arial,sans-serif;line-height:1.45;text-transform:uppercase}
+header{background:linear-gradient(125deg,#1d6547,#2d8b65 58%,#47afd2);color:white;padding:24px 18px 28px;text-align:center;position:relative;overflow:hidden}
+header:before,header:after{content:"✦";position:absolute;font-size:42px;color:#ffe18b;opacity:.9}header:before{left:7%;top:20px}header:after{right:8%;bottom:18px}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:.8rem;font-weight:bold}.hero-title{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:8px 0}.hero-sub{max-width:720px;margin:10px auto 0;font-size:1.05rem}
+main{max-width:1050px;margin:22px auto;padding:0 14px 40px}.progress-wrap{background:white;border:1px solid #d8e8dd;border-radius:16px;padding:14px 16px;margin-bottom:18px;box-shadow:0 3px 12px #153d2810}
+.progress-label{display:flex;justify-content:space-between;gap:10px;font-weight:bold;font-size:.9rem}.progress{height:12px;border-radius:20px;background:#e8eee9;overflow:hidden;margin-top:8px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),#ffd36d);transition:width .25s}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.nav button{border:1px solid #cbded1;background:white;color:var(--ink);padding:10px 14px;border-radius:999px;font-weight:bold;cursor:pointer}.nav button.active{background:var(--green);color:white;border-color:var(--green)}.nav button:disabled{opacity:.48;cursor:not-allowed;filter:grayscale(.25)}
+.panel{display:none;background:white;border:1px solid #dbe7de;border-radius:20px;padding:clamp(18px,3vw,30px);box-shadow:0 5px 18px #19354a0d}.panel.active{display:block}.final-page{text-align:center;padding:clamp(26px,6vw,60px);background:linear-gradient(145deg,#fff,#eef8f0)}.final-page .final-icon{font-size:4rem}.final-page h2{color:var(--green);font-size:clamp(1.8rem,4vw,2.6rem)}.encyclopedia-button{display:inline-block;margin:12px auto;background:var(--blue);color:white;text-decoration:none;font-weight:bold;padding:14px 22px;border-radius:14px}.final-page p{font-size:1.1rem;max-width:650px;margin:12px auto}.panel h2{margin:0 0 6px;font-size:clamp(1.5rem,3vw,2rem)}.intro{margin-top:0;color:#526a78}.mission-tag{display:inline-block;background:var(--orange-light);color:#92520c;border-radius:999px;padding:5px 11px;font-weight:bold;font-size:.8rem;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}.choice{border:2px solid #dbe8df;border-radius:15px;padding:14px;background:#fff;cursor:pointer;text-align:left;font:inherit;color:var(--ink);min-height:95px}.choice strong{display:block;font-size:1.05rem}.choice small{display:block;color:#607583;margin-top:4px}.choice:hover{border-color:var(--blue)}.choice.selected{border-color:var(--green);background:var(--green-light)}.choice.correct{border-color:#2d9b62;background:#e3f7e9}.choice.wrong{border-color:#d96c56;background:#fff0ed}
+button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer}.primary{background:var(--green);color:white}.primary:hover{background:#205d40}.secondary{background:var(--blue-light);color:#145b7e}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.feedback{margin-top:12px;padding:12px 14px;border-radius:12px;background:#f0f6f2;min-height:22px}.feedback.good{background:#e4f7e9;color:#205d40}.feedback.try{background:#fff1df;color:#7d4a0b}
+.plant-match-layout{display:grid;grid-template-columns:minmax(240px,1fr) minmax(230px,1fr);gap:16px;align-items:center}.plant-svg{width:100%;max-width:360px;margin:auto;display:block}.match-options{display:grid;gap:9px}.match-row{display:grid;grid-template-columns:38px 1fr;gap:8px;align-items:center}.match-row strong{display:grid;place-items:center;background:var(--green-light);color:var(--green);border-radius:9px;padding:8px}.match-options select{font-size:.9rem}.question{border:2px solid #d8e8dd;border-radius:14px;padding:15px;margin:13px 0;background:#f3fbf5}.question:nth-of-type(2n){background:#fff5e8;border-color:#f4d4a8}.question:nth-of-type(3n){background:#eef8ff;border-color:#b8def0}.question h3{color:#19354a}.question h3{font-size:1.05rem;margin:0 0 10px}.options{display:flex;gap:8px;flex-wrap:wrap;counter-reset:option}.options label{border:1px solid #d6e2d9;border-radius:10px;padding:8px 11px;cursor:pointer;display:flex;align-items:flex-start;gap:6px}.options label:before{counter-increment:option;content:counter(option,lower-alpha) ")";display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:50%;background:var(--blue-light);color:#145b7e;font-weight:900;font-size:.85rem}.options input{accent-color:var(--green);margin:5px 0 0}.choice{position:relative;padding-left:42px}.choice:before{content:attr(data-letter);position:absolute;left:10px;top:12px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--orange-light);color:#92520c;font-size:.82rem;font-weight:900}.choice.selected:before,.choice.correct:before{background:var(--green);color:white}#livingChoices{counter-reset:livingchoice}#livingChoices .choice:before{counter-increment:livingchoice;content:counter(livingchoice,lower-alpha) ")"}#dietChoices{counter-reset:dietchoice}#dietChoices .choice:before{counter-increment:dietchoice;content:counter(dietchoice,lower-alpha) ")"}
+input[type=text],textarea,select{text-transform:none;width:100%;border:1.5px solid #cbded2;border-radius:10px;padding:11px;font:inherit;background:white;color:var(--ink)}textarea{min-height:75px;resize:vertical}.field{margin:12px 0}.field label{display:block;font-weight:bold;margin-bottom:6px}.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.tip{background:var(--blue-light);border-left:5px solid var(--blue);padding:12px 14px;border-radius:10px;margin:14px 0}.animal-link{display:inline-block;margin:6px 0;color:#12648b;font-weight:bold}.badge{display:inline-block;background:var(--green-light);color:var(--green);padding:5px 10px;border-radius:999px;font-weight:bold}
+footer{text-align:center;color:#637986;font-size:.85rem;padding:22px}
+#certificate{border:2px dashed #91b8a0;border-radius:16px;padding:18px;margin-top:18px;background:#fffefb}.cert-title{text-align:center;color:var(--green);font-size:1.4rem;font-weight:900}.certificate-row{padding:8px 0;border-bottom:1px solid #dfe9e1}.certificate-row strong{display:inline-block;min-width:190px}
+@media(max-width:650px){.plant-match-layout{grid-template-columns:1fr}.plant-svg{max-width:300px}}
+@media(max-width:520px){.nav button{flex:1 1 44%;font-size:.9rem}.progress-label{font-size:.8rem}.certificate-row strong{min-width:0;display:block}}
+@media print{body{background:white;font-size:11pt}header,.progress-wrap,.nav,.no-print,footer{display:none!important}main{margin:0;padding:0;max-width:none}.panel{display:none!important;box-shadow:none;border:0;padding:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">INNOVA · Ciencias Naturales</div>
+  <h1 class="hero-title">🌿 Misión: Exploradores<br>de los seres vivos</h1>
+  <p class="hero-sub">¡OBSERVÁ, INVESTIGÁ Y RESOLVÉ LOS DESAFÍOS! AL TERMINAR, COMPLETÁ LA FICHA EN PAPEL.</p>
+</header>
+<main>
+  <div class="progress-wrap no-print">
+    <div class="progress-label"><span id="progressText">Misiones completadas: 0 de 4</span><span id="progressPct">0%</span></div>
+    <div class="progress"><span id="progressBar"></span></div>
+  </div>
+  <div class="nav no-print" aria-label="Misiones">
+    <button class="active" data-target="mission1">🔎 1. Seres vivos</button>
+    <button data-target="mission2">🐾 2. Animales</button>
+    <button data-target="mission3">🌱 3. Plantas</button>
+    <button data-target="mission4">🧩 4. Conectamos</button>
+  </div>
+
+  <section class="panel active" id="mission1">
+    <span class="mission-tag">MISIÓN 1</span>
+    <h2>🔎 ¿Ser vivo o no vivo?</h2>
+    <p class="intro">Elegí cuáles de estos elementos son seres vivos. ¡Pensá qué características tienen!</p>
+    <div class="grid" id="livingChoices">
+      <button class="choice" data-letter="" data-answer="living"><strong>🌳 Un árbol</strong><small>Crece y cambia a lo largo de su vida.</small></button>
+      <button class="choice" data-letter="" data-answer="nonliving"><strong>🪨 Una piedra</strong><small>Es parte de la naturaleza.</small></button>
+      <button class="choice" data-letter="" data-answer="living"><strong>🐸 Una rana</strong><small>Se alimenta y crece.</small></button>
+      <button class="choice" data-letter="" data-answer="nonliving"><strong>🚲 Una bicicleta</strong><small>Puede moverse si alguien la usa.</small></button>
+      <button class="choice" data-letter="" data-answer="living"><strong>🌼 Una planta con flores</strong><small>Crece y necesita agua y luz.</small></button>
+      <button class="choice" data-letter="" data-answer="nonliving"><strong>⚽ Una pelota</strong><small>Puede rodar.</small></button>
+    </div>
+    <div class="tip"><strong>Pista:</strong> que algo pueda moverse no significa que sea un ser vivo. Los seres vivos nacen, crecen, necesitan recursos para vivir y atraviesan cambios a lo largo de su vida.</div>
+    <button class="primary no-print" onclick="checkLiving()">Comprobar selección</button>
+    <div class="feedback" id="livingFeedback" aria-live="polite">Marcá todos los seres vivos y comprobá tu respuesta.</div>
+    <div class="actions no-print"><button class="primary" onclick="go('mission2')">Ir a la misión 2 →</button></div>
+  </section>
+
+  <section class="panel" id="mission2">
+    <span class="mission-tag">MISIÓN 2</span>
+    <h2>🐾 Detectives de animales</h2>
+    <p class="intro">Resolvé los desafíos sobre los animales. Podés consultar la enciclopedia que usaron en clase.</p>
+    <a class="animal-link" href="https://danielabauducco.github.io/enciclopedia1a/" target="_blank" rel="noopener">📚 Abrir la enciclopedia de animales</a>
+    <div class="question"><h3>1. ¿Qué significa que un animal sea vertebrado?</h3><div class="options">
+      <label><input type="radio" name="q1" value="a"> Tiene columna vertebral.</label>
+      <label><input type="radio" name="q1" value="b"> Tiene cuatro patas.</label>
+      <label><input type="radio" name="q1" value="c"> Vive en el agua.</label>
+    </div></div>
+    <div class="question"><h3>2. ¿Cuál de estos animales es invertebrado?</h3><div class="options">
+      <label><input type="radio" name="q2" value="a"> Perro</label>
+      <label><input type="radio" name="q2" value="b"> Mariposa</label>
+      <label><input type="radio" name="q2" value="c"> Rana</label>
+    </div></div>
+    <div class="question"><h3>3. ¿QUÉ ANIMAL ES CARNÍVORO?</h3>
+      <div class="grid" id="dietChoices">
+        <button class="choice" type="button" onclick="pickAnimal(this,'herbivore')"><strong>🐄 VACA</strong><small>COME PASTO Y OTRAS PLANTAS.</small></button>
+        <button class="choice" type="button" onclick="pickAnimal(this,'carnivore')"><strong>🦁 LEÓN</strong><small>CAZA OTROS ANIMALES PARA ALIMENTARSE.</small></button>
+        <button class="choice" type="button" onclick="pickAnimal(this,'omnivore')"><strong>🐻 OSO</strong><small>PUEDE COMER ALIMENTOS DE ORIGEN ANIMAL Y VEGETAL.</small></button>
+      </div>
+      <div class="feedback" id="dietFeedback">OBSERVÁ LAS OPCIONES Y ELEGÍ UNA.</div>
+    </div>
+    <div class="question"><h3>4. ¿QUÉ NOS DICE LA COBERTURA CORPORAL DE UN ANIMAL?</h3><div class="options">
+      <label><input type="radio" name="q4" value="a"> Si tiene pelo, plumas, escamas o piel desnuda.</label>
+      <label><input type="radio" name="q4" value="b"> Lo que come.</label>
+      <label><input type="radio" name="q4" value="c"> El lugar donde vive.</label>
+    </div></div>
+    <div class="question"><h3>5. ¿CUÁL ES UNA FORMA DE DESPLAZAMIENTO?</h3><div class="options">
+      <label><input type="radio" name="q5" value="a"> Nacer de un huevo</label>
+      <label><input type="radio" name="q5" value="b"> Reptar</label>
+      <label><input type="radio" name="q5" value="c"> Tener plumas</label>
+    </div></div>
+    <div class="question"><h3>6. ¿CÓMO PUEDEN NACER LOS ANIMALES?</h3><div class="options">
+      <label><input type="radio" name="q6" value="a"> De huevos o del vientre de su madre.</label>
+      <label><input type="radio" name="q6" value="b"> De una semilla.</label>
+      <label><input type="radio" name="q6" value="c"> De una hoja.</label>
+    </div></div>
+    <button class="primary no-print" onclick="checkQuiz()">Comprobar respuestas</button>
+    <div class="feedback" id="quizFeedback" aria-live="polite">RESPONDÉ LAS PREGUNTAS Y ELEGÍ TAMBIÉN EL ANIMAL CARNÍVORO.</div>
+    <div class="actions no-print"><button class="secondary" onclick="go('mission1')">← Volver</button><button class="primary" onclick="go('mission3')">Ir a la misión 3 →</button></div>
+  </section>
+
+  <section class="panel" id="mission3">
+    <span class="mission-tag">MISIÓN 3</span>
+    <h2>🌱 El mundo de las plantas</h2>
+    <p class="intro">Observá, elegí y comprobá cuánto recordás sobre las plantas.</p>
+    <div class="question"><h3>¡UNÍ CADA NÚMERO CON LA PARTE DE LA PLANTA!</h3>
+      <p>OBSERVÁ EL DIBUJO. DESPUÉS, ELEGÍ EL NOMBRE QUE CORRESPONDE A CADA NÚMERO.</p>
+      <div class="plant-match-layout">
+        <svg class="plant-svg" viewBox="0 0 360 340" role="img" aria-label="Dibujo de una planta con cinco números que señalan sus partes">
+          <rect x="10" y="10" width="340" height="320" rx="18" fill="#f4fbf3"/>
+          <path d="M30 245 Q180 230 330 245" stroke="#a4774d" stroke-width="4" fill="none"/>
+          <path d="M177 245 C175 210 179 170 180 112" stroke="#368b4e" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <path d="M178 178 C150 170 128 150 113 128 C148 126 171 144 178 178Z" fill="#60b95c" stroke="#2d7855" stroke-width="2"/>
+          <path d="M181 155 C205 142 229 120 239 96 C206 99 188 121 181 155Z" fill="#7bcf6c" stroke="#2d7855" stroke-width="2"/>
+          <path d="M180 244 C164 262 154 276 145 300 M180 244 C183 268 195 284 208 302 M178 250 C170 273 174 292 174 311 M181 251 C203 263 224 270 239 287" stroke="#a4774d" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M171 198 C157 186 140 194 139 210 C138 227 151 237 165 231 C178 226 181 210 171 198Z" fill="#e84f45" stroke="#a82f2b" stroke-width="2"/><path d="M158 196 Q164 185 170 195 Q177 187 179 198 L169 204Z" fill="#368b4e" stroke="#2d7855" stroke-width="1.5"/>
+          <path d="M180 112 L180 91" stroke="#368b4e" stroke-width="8" stroke-linecap="round"/>
+          <g transform="translate(180 75)"><circle r="17" fill="#ffca57" stroke="#e79a28" stroke-width="2"/><circle cx="0" cy="-19" r="12" fill="#f18b9d"/><circle cx="18" cy="-6" r="12" fill="#f18b9d"/><circle cx="11" cy="15" r="12" fill="#f18b9d"/><circle cx="-11" cy="15" r="12" fill="#f18b9d"/><circle cx="-18" cy="-6" r="12" fill="#f18b9d"/><circle r="9" fill="#ffcf43"/></g>
+          <path d="M196 78 L232 62" stroke="#e28b24" stroke-width="2" fill="none"/><circle cx="248" cy="56" r="16" fill="#fff0dc" stroke="#e28b24" stroke-width="2"/><text x="248" y="62" text-anchor="middle" font-size="17" font-weight="bold" fill="#78480d">1</text>
+          <path d="M132 146 L95 137" stroke="#2d7855" stroke-width="2" fill="none"/><circle cx="80" cy="134" r="16" fill="#e5f3e9" stroke="#2d7855" stroke-width="2"/><text x="80" y="140" text-anchor="middle" font-size="17" font-weight="bold" fill="#205d40">2</text>
+          <path d="M184 182 L237 196" stroke="#2588b7" stroke-width="2" fill="none"/><circle cx="253" cy="200" r="16" fill="#e6f5fc" stroke="#2588b7" stroke-width="2"/><text x="253" y="206" text-anchor="middle" font-size="17" font-weight="bold" fill="#145b7e">3</text>
+          <path d="M144 215 L93 225" stroke="#e28b24" stroke-width="2" fill="none"/><circle cx="77" cy="228" r="16" fill="#fff0dc" stroke="#e28b24" stroke-width="2"/><text x="77" y="234" text-anchor="middle" font-size="17" font-weight="bold" fill="#78480d">4</text>
+          <path d="M206 284 L251 300" stroke="#cf6b85" stroke-width="2" fill="none"/><circle cx="267" cy="305" r="16" fill="#fce7ed" stroke="#cf6b85" stroke-width="2"/><text x="267" y="311" text-anchor="middle" font-size="17" font-weight="bold" fill="#87364d">5</text>
+        </svg>
+        <div class="match-options">
+          <div class="match-row"><strong>1</strong><select id="part1" aria-label="Parte número 1"><option value="">ELEGÍ UNA PARTE</option><option value="flor">FLOR</option><option value="hojas">HOJAS</option><option value="tallo">TALLO</option><option value="raiz">RAÍZ</option><option value="fruto">FRUTO</option></select></div>
+          <div class="match-row"><strong>2</strong><select id="part2" aria-label="Parte número 2"><option value="">ELEGÍ UNA PARTE</option><option value="flor">FLOR</option><option value="hojas">HOJAS</option><option value="tallo">TALLO</option><option value="raiz">RAÍZ</option><option value="fruto">FRUTO</option></select></div>
+          <div class="match-row"><strong>3</strong><select id="part3" aria-label="Parte número 3"><option value="">ELEGÍ UNA PARTE</option><option value="flor">FLOR</option><option value="hojas">HOJAS</option><option value="tallo">TALLO</option><option value="raiz">RAÍZ</option><option value="fruto">FRUTO</option></select></div>
+          <div class="match-row"><strong>4</strong><select id="part4" aria-label="Parte número 4"><option value="">ELEGÍ UNA PARTE</option><option value="flor">FLOR</option><option value="hojas">HOJAS</option><option value="tallo">TALLO</option><option value="raiz">RAÍZ</option><option value="fruto">FRUTO</option></select></div>
+          <div class="match-row"><strong>5</strong><select id="part5" aria-label="Parte número 5"><option value="">ELEGÍ UNA PARTE</option><option value="flor">FLOR</option><option value="hojas">HOJAS</option><option value="tallo">TALLO</option><option value="raiz">RAÍZ</option><option value="fruto">FRUTO</option></select></div>
+          <button class="primary" onclick="checkPlantMatch()">COMPROBAR UNIONES</button>
+          <div class="feedback" id="matchFeedback" aria-live="polite">UNÍ LOS CINCO NÚMEROS CON LAS PARTES CORRECTAS.</div>
+        </div>
+      </div>
+    </div>
+    <div class="question"><h3>1. ¿QUÉ PARTE DE LA PLANTA SUELE ABSORBER AGUA DEL SUELO?</h3><div class="options">
+      <label><input type="radio" name="p1" value="a"> La flor</label><label><input type="radio" name="p1" value="b"> La raíz</label><label><input type="radio" name="p1" value="c"> El fruto</label>
+    </div></div>
+    <div class="question"><h3>2. ¿QUÉ PARTE SOSTIENE LA PLANTA Y COMUNICA SUS PARTES?</h3><div class="options">
+      <label><input type="radio" name="p2" value="a"> El tallo</label><label><input type="radio" name="p2" value="b"> La semilla</label><label><input type="radio" name="p2" value="c"> La flor</label>
+    </div></div>
+    <div class="question"><h3>3. ¿CUÁL ES UNA CARACTERÍSTICA TÍPICA DE UN ÁRBOL?</h3><div class="options">
+      <label><input type="radio" name="p3" value="a"> Tiene un tronco leñoso.</label><label><input type="radio" name="p3" value="b"> Siempre es muy pequeño y tiene tallos blandos.</label><label><input type="radio" name="p3" value="c"> No tiene raíz.</label>
+    </div></div>
+    <div class="question"><h3>4. ¿QUÉ SUELE CARACTERIZAR A UN ARBUSTO?</h3><div class="options">
+      <label><input type="radio" name="p4" value="a"> Tiene varios tallos leñosos desde cerca del suelo.</label><label><input type="radio" name="p4" value="b"> No tiene tallo.</label><label><input type="radio" name="p4" value="c"> Es siempre una planta acuática.</label>
+    </div></div>
+    <div class="question"><h3>5. ¿CUÁL DE ESTAS OPCIONES SUELE SER UNA HIERBA?</h3><div class="options">
+      <label><input type="radio" name="p5" value="a"> Un roble grande</label><label><input type="radio" name="p5" value="b"> Un pasto de tallo blando</label><label><input type="radio" name="p5" value="c"> Un arbusto de tallos leñosos</label>
+    </div></div>
+    <button class="primary no-print" onclick="checkPlants()">Comprobar respuestas</button>
+    <div class="feedback" id="plantFeedback" aria-live="polite">Respondé las cinco preguntas para revisar tus ideas.</div>
+    <div class="actions no-print"><button class="secondary" onclick="go('mission2')">← Volver</button><button class="primary" onclick="go('mission4')">Ir a la misión 4 →</button></div>
+  </section>
+
+  <section class="panel" id="mission4">
+    <span class="mission-tag">MISIÓN 4</span>
+    <h2>🧩 ¿Qué tenemos en común?</h2>
+    <p class="intro">Los animales y las plantas son diferentes, pero ambos son seres vivos. Elegí la respuesta que mejor explica cada idea.</p>
+    <div class="question"><h3>1. ¿QUÉ TIENEN EN COMÚN UNA PLANTA Y UN ANIMAL?</h3><div class="options">
+      <label><input type="radio" name="c1" value="a"> Ambos nacen, crecen y necesitan recursos para vivir.</label>
+      <label><input type="radio" name="c1" value="b"> Ambos caminan.</label>
+      <label><input type="radio" name="c1" value="c"> Ambos tienen patas.</label>
+    </div></div>
+    <div class="question"><h3>2. ¿CUÁL ES UNA DIFERENCIA ENTRE UNA PLANTA Y MUCHOS ANIMALES?</h3><div class="options">
+      <label><input type="radio" name="c2" value="a"> Las plantas no son seres vivos.</label>
+      <label><input type="radio" name="c2" value="b"> Los animales pueden desplazarse de un lugar a otro; las plantas generalmente permanecen fijas al suelo.</label>
+      <label><input type="radio" name="c2" value="c"> Los animales no crecen.</label>
+    </div></div>
+    <div class="question"><h3>3. ¿POR QUÉ UNA PIEDRA NO SE CONSIDERA UN SER VIVO?</h3><div class="options">
+      <label><input type="radio" name="c3" value="a"> Porque no nace, crece ni atraviesa un ciclo de vida como los seres vivos.</label>
+      <label><input type="radio" name="c3" value="b"> Porque no puede cambiar de lugar por sí sola.</label>
+      <label><input type="radio" name="c3" value="c"> Porque está en la naturaleza.</label>
+    </div></div>
+    <button class="primary no-print" onclick="checkCommon()">Comprobar respuestas</button>
+    <div class="feedback" id="commonFeedback" aria-live="polite">Pensá qué características comparten los seres vivos.</div>
+    <div class="tip"><strong>¡YA CASI TERMINÁS!</strong> RECORDÁ COMPLETAR EN PAPEL TU FICHA DE INVESTIGADOR/A.</div>
+    <div class="actions no-print"><button class="secondary" onclick="go('mission3')">← VOLVER</button><button class="primary" onclick="finishMissions()">🏅 TERMINAR LAS MISIONES</button></div>
+    <div class="feedback" id="finishFeedback" aria-live="polite">CUANDO HAYAS RESUELTO LOS DESAFÍOS, TOCÁ “TERMINAR LAS MISIONES”.</div>
+  </section>
+
+  <section class="panel final-page" id="finalPage">
+    <div class="final-icon">🎒🌿📚</div>
+    <span class="mission-tag">¡MISIÓN CUMPLIDA!</span>
+    <h2>AHORA TE TOCA SEGUIR EN EL CUADERNO…</h2>
+    <p>PEDILE LA <strong>FICHA DE EXPLORACIÓN</strong> A TU SEÑO Y COMPLETALA EN PAPEL.</p>
+    <p>¿QUERÉS SEGUIR INVESTIGANDO? ABRÍ LA ENCICLOPEDIA Y DESCUBRÍ MÁS SOBRE LOS ANIMALES.</p>
+    <a class="encyclopedia-button" href="https://danielabauducco.github.io/enciclopedia1a/" target="_blank" rel="noopener">📚 ABRIR LA ENCICLOPEDIA</a>
+    <div class="actions no-print" style="justify-content:center"><button class="secondary" onclick="go('mission1')">VOLVER A LAS MISIONES</button></div>
+  </section>
+
+</main>
+<footer>INNOVA · Aprender observando, preguntando y descubriendo 🌱</footer>
+<script>
+const STORAGE_KEY='exploradores_seres_vivos_v2';
+const completed=new Set();
+const missionIds=['mission1','mission2','mission3','mission4'];
+function saveState(){
+  const state={completed:[...completed],selectedCards:[...document.querySelectorAll('.choice.selected')].map(e=>e.id||e.dataset.savekey).filter(Boolean),radios:[...document.querySelectorAll('input[type=radio]:checked')].map(e=>[e.name,e.value]),selects:[...document.querySelectorAll('select')].map(e=>[e.id,e.value])};
+  document.querySelectorAll('.choice').forEach((e,i)=>{if(!e.id)e.dataset.savekey=e.dataset.savekey||('choice_'+i);});
+  state.selectedCards=[...document.querySelectorAll('.choice.selected')].map(e=>e.id||e.dataset.savekey).filter(Boolean);
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}
+}
+function loadState(){try{const state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');(state.completed||[]).forEach(n=>completed.add(n));document.querySelectorAll('.choice').forEach((e,i)=>{if(!e.id)e.dataset.savekey=e.dataset.savekey||('choice_'+i);if((state.selectedCards||[]).includes(e.id||e.dataset.savekey))e.classList.add('selected');});(state.radios||[]).forEach(([name,value])=>{const el=document.querySelector(`input[name="${name}"][value="${value}"]`);if(el)el.checked=true;});(state.selects||[]).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.value=value;});dietCorrect=!!document.querySelector('#dietChoices .choice.selected[data-answer="carnivore"]');}catch(e){}}
+function missionUnlocked(id){if(id==='mission1')return true;if(id==='finalPage')return completed.size===4;const idx=missionIds.indexOf(id);return idx>0&&completed.has(idx);}
+function go(id){if(!missionUnlocked(id)){const idx=missionIds.indexOf(id);const needed=idx>=0?idx:4;feedback(needed===1?'livingFeedback':needed===2?'quizFeedback':needed===3?'plantFeedback':'commonFeedback','PRIMERO TENÉS QUE COMPLETAR LA MISIÓN ANTERIOR.','try');return;}document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.target===id));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.target)));
+function updateProgress(){let n=completed.size;document.getElementById('progressText').textContent=`Misiones completadas: ${n} de 4`;document.getElementById('progressPct').textContent=`${Math.round(n/4*100)}%`;document.getElementById('progressBar').style.width=`${n/4*100}%`;document.querySelectorAll('.nav button').forEach((b,i)=>{const done=completed.has(i+1);b.disabled=i>0&&!completed.has(i);if(done&&!b.textContent.includes('✓'))b.textContent+=' ✓';});saveState();}
+function feedback(id,msg,type=''){const e=document.getElementById(id);e.textContent=msg;e.className='feedback '+type;}
+function checkLiving(){const cards=[...document.querySelectorAll('#livingChoices .choice')];let right=0;cards.forEach(c=>{const selected=c.classList.contains('selected');const correct=c.dataset.answer==='living';c.classList.toggle('correct',selected&&correct);c.classList.toggle('wrong',selected&&!correct);if(selected===correct)right++;});if(right===cards.length){completed.add(1);feedback('livingFeedback','¡EXCELENTE! RECONOCISTE TODOS LOS SERES VIVOS Y LOS ELEMENTOS NO VIVOS. RECORDÁ: MOVERSE NO ES LA ÚNICA CARACTERÍSTICA DE UN SER VIVO.','good');}else{completed.delete(1);feedback('livingFeedback','¡BUEN INTENTO! REVISÁ LAS OPCIONES MARCADAS. LOS SERES VIVOS NACEN, CRECEN Y NECESITAN RECURSOS PARA VIVIR.','try');}updateProgress();}
+document.querySelectorAll('#livingChoices .choice').forEach(c=>c.addEventListener('click',()=>{c.classList.toggle('selected');saveState();}));
+function score(names,answers,feedbackId,mission){let score=0,answered=0;names.forEach((n,i)=>{const chosen=document.querySelector(`input[name="${n}"]:checked`);if(chosen){answered++;if(chosen.value===answers[i])score++;}});if(answered<names.length){feedback(feedbackId,`Respondé todas las preguntas. Contestaste ${answered} de ${names.length}.`,'try');return;}if(score===names.length){completed.add(mission);feedback(feedbackId,`¡Muy bien! ${score} de ${names.length} respuestas correctas. MISIÓN COMPLETADA.`, 'good');}else feedback(feedbackId,`Lograste ${score} de ${names.length}. Volvé a leer las preguntas, revisá lo que necesites y probá otra vez.`,'try');updateProgress();}
+let dietCorrect=false;
+function pickAnimal(button,answer){document.querySelectorAll('#dietChoices .choice').forEach(c=>c.classList.remove('selected','correct','wrong'));button.classList.add('selected');dietCorrect=answer==='carnivore';if(dietCorrect){button.classList.add('correct');feedback('dietFeedback','¡CORRECTO! EL LEÓN ES CARNÍVORO: SE ALIMENTA DE OTROS ANIMALES.','good');}else{button.classList.add('wrong');feedback('dietFeedback','¡VOLVÉ A INTENTARLO! PENSÁ QUÉ ANIMAL SE ALIMENTA DE OTROS ANIMALES.','try');}saveState();}
+function checkQuiz(){const names=['q1','q2','q4','q5','q6'];const answers=['a','b','a','b','a'];let answered=0,correct=0;names.forEach((n,i)=>{const x=document.querySelector(`input[name="${n}"]:checked`);if(x){answered++;if(x.value===answers[i])correct++;}});if(answered<names.length||!document.querySelector('#mission2 .grid .choice.selected')){feedback('quizFeedback','RESPONDÉ LAS CINCO PREGUNTAS Y ELEGÍ EL ANIMAL CARNÍVORO.','try');return;}if(correct===names.length&&dietCorrect){completed.add(2);feedback('quizFeedback','¡EXCELENTE! RESOLVISTE CORRECTAMENTE TODOS LOS DESAFÍOS SOBRE ANIMALES.','good');}else{completed.delete(2);feedback('quizFeedback',`TENÉS ${correct} DE ${names.length} RESPUESTAS CORRECTAS. REVISÁ TAMBIÉN LA PREGUNTA DEL ANIMAL CARNÍVORO.`,'try');}updateProgress();}
+function checkPlantMatch(){const answers=['flor','hojas','tallo','fruto','raiz'];let count=0,filled=0;answers.forEach((a,i)=>{const el=document.getElementById('part'+(i+1));if(el.value)filled++;if(el.value===a)count++;});if(filled<5){feedback('matchFeedback','COMPLETÁ LAS CINCO UNIONES ANTES DE COMPROBAR.','try');return false;}if(count===5){feedback('matchFeedback','¡MUY BIEN! RECONOCISTE LAS PARTES DE LA PLANTA.','good');saveState();return true;}else{feedback('matchFeedback',`HAY ${count} UNIONES CORRECTAS. VOLVÉ A MIRAR EL DIBUJO Y PROBÁ OTRA VEZ.`,'try');return false;}}
+function checkPlants(){const matchOk=checkPlantMatch();if(!matchOk){completed.delete(3);feedback('plantFeedback','PRIMERO COMPLETÁ CORRECTAMENTE LAS UNIONES DEL DIBUJO. DESPUÉS COMPROBÁ LAS PREGUNTAS.','try');updateProgress();return;}score(['p1','p2','p3','p4','p5'],['b','a','a','a','b'],'plantFeedback',3)}
+function checkCommon(){score(['c1','c2','c3'],['a','b','a'],'commonFeedback',4)}
+function finishMissions(){if(!completed.has(4)){feedback('finishFeedback','PRIMERO COMPLETÁ CORRECTAMENTE TODAS LAS PREGUNTAS DE ESTA MISIÓN.','try');return;}go('finalPage');}
+document.querySelectorAll('input[type=radio], select').forEach(el=>el.addEventListener('change',saveState));
+loadState();updateProgress();
+</script>
+</body>
+</html>
